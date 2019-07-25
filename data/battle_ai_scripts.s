@@ -95,7 +95,7 @@ CheckIfWonderGuardCancelsMove: @ 82DBFE4
 
 CheckIfLevitateCancelsGroundMove: @ 82DBFEF
 	get_curr_move_type
-	if_equal TYPE_GROUND, Score_Minus10
+	if_equal TYPE_EARTH, Score_Minus10
 
 AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -677,9 +677,9 @@ AI_CBM_Substitute: @ 82DC568
 AI_CBM_LeechSeed: @ 82DC57A
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, Score_Minus10
 	get_target_type1
-	if_equal TYPE_GRASS, Score_Minus10
+	if_equal TYPE_NATURE, Score_Minus10
 	get_target_type2
-	if_equal TYPE_GRASS, Score_Minus10
+	if_equal TYPE_NATURE, Score_Minus10
 	end
 
 AI_CBM_Disable: @ 82DC595
@@ -1116,8 +1116,8 @@ AI_CV_Powder2:
 	if_random_less_than 100, AI_CV_Powder3
 	score +1
 AI_CV_Powder3:
-	if_type AI_USER, TYPE_BUG, AI_CV_Powder4
-	if_type AI_USER, TYPE_GRASS, AI_CV_Powder4
+	if_type AI_USER, TYPE_NATURE, AI_CV_Powder4
+	if_type AI_USER, TYPE_NATURE, AI_CV_Powder4
 	if_no_type AI_USER, TYPE_STEEL, AI_CV_Powder5
 AI_CV_Powder4:
 	score +1
@@ -1322,10 +1322,9 @@ AI_CV_DefenseUp_PhysicalTypes: @ 82DCC53
     .byte TYPE_NORMAL
     .byte TYPE_FIGHTING
     .byte TYPE_POISON
-    .byte TYPE_GROUND
-    .byte TYPE_FLYING
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
+    .byte TYPE_EARTH
+    .byte TYPE_WIND
+    .byte TYPE_BEAST
     .byte TYPE_GHOST
     .byte TYPE_STEEL
     .byte -1
@@ -1402,10 +1401,9 @@ AI_CV_SpDefUp_PhysicalTypes: @ 82DCD0A
     .byte TYPE_NORMAL
     .byte TYPE_FIGHTING
     .byte TYPE_POISON
-    .byte TYPE_GROUND
-    .byte TYPE_FLYING
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
+    .byte TYPE_EARTH
+    .byte TYPE_WIND
+    .byte TYPE_BEAST
     .byte TYPE_GHOST
     .byte TYPE_STEEL
     .byte -1
@@ -1515,9 +1513,8 @@ AI_CV_AttackDown_End: @ 82DCE42
 AI_CV_AttackDown_UnknownTypeList:
     .byte TYPE_NORMAL
     .byte TYPE_FIGHTING
-    .byte TYPE_GROUND
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
+    .byte TYPE_EARTH
+    .byte TYPE_BEAST
     .byte TYPE_STEEL
     .byte -1
 
@@ -1581,12 +1578,13 @@ AI_CV_SpAtkDown_End: @ 82DCEE1
 AI_CV_SpAtkDown_SpecialTypeList: @ 82DCEE2
     .byte TYPE_FIRE
     .byte TYPE_WATER
-    .byte TYPE_GRASS
+    .byte TYPE_NATURE
     .byte TYPE_ELECTRIC
-    .byte TYPE_PSYCHIC
+    .byte TYPE_REASON
     .byte TYPE_ICE
-    .byte TYPE_DRAGON
+    .byte TYPE_FAITH
     .byte TYPE_DARK
+	.byte TYPE_HEART
     .byte -1
 
 AI_CV_SpDefDown: @ 82DCEEB
@@ -1833,12 +1831,13 @@ AI_CV_LightScreen_End:
 AI_CV_LightScreen_SpecialTypeList:
     .byte TYPE_FIRE
     .byte TYPE_WATER
-    .byte TYPE_GRASS
+    .byte TYPE_NATURE
     .byte TYPE_ELECTRIC
-    .byte TYPE_PSYCHIC
+    .byte TYPE_REASON
     .byte TYPE_ICE
-    .byte TYPE_DRAGON
+    .byte TYPE_FAITH
     .byte TYPE_DARK
+	.byte TYPE_HEART
     .byte -1
 
 AI_CV_Rest:
@@ -2000,11 +1999,10 @@ AI_CV_Reflect_End:
 AI_CV_Reflect_PhysicalTypeList:
     .byte TYPE_NORMAL
     .byte TYPE_FIGHTING
-    .byte TYPE_FLYING
+    .byte TYPE_WIND
     .byte TYPE_POISON
-    .byte TYPE_GROUND
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
+    .byte TYPE_EARTH
+    .byte TYPE_BEAST
     .byte TYPE_GHOST
     .byte TYPE_STEEL
     .byte -1
@@ -2193,11 +2191,10 @@ AI_CV_Counter_End:
 AI_CV_Counter_PhysicalTypeList:
     .byte TYPE_NORMAL
     .byte TYPE_FIGHTING
-    .byte TYPE_FLYING
+    .byte TYPE_WIND
     .byte TYPE_POISON
-    .byte TYPE_GROUND
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
+    .byte TYPE_EARTH
+    .byte TYPE_BEAST
     .byte TYPE_GHOST
     .byte TYPE_STEEL
     .byte -1
@@ -2564,11 +2561,11 @@ AI_CV_Pursuit:
 	get_target_type1
 	if_equal TYPE_GHOST, AI_CV_Pursuit2
 	get_target_type1
-	if_equal TYPE_PSYCHIC, AI_CV_Pursuit2
+	if_equal TYPE_REASON, AI_CV_Pursuit2
 	get_target_type2
 	if_equal TYPE_GHOST, AI_CV_Pursuit2
 	get_target_type2
-	if_equal TYPE_PSYCHIC, AI_CV_Pursuit2
+	if_equal TYPE_REASON, AI_CV_Pursuit2
 	goto AI_CV_Pursuit_End
 
 AI_CV_Pursuit2:
@@ -2726,12 +2723,13 @@ AI_CV_MirrorCoat_End:
 AI_CV_MirrorCoat_SpecialTypeList:
     .byte TYPE_FIRE
     .byte TYPE_WATER
-    .byte TYPE_GRASS
+    .byte TYPE_NATURE
     .byte TYPE_ELECTRIC
-    .byte TYPE_PSYCHIC
+    .byte TYPE_REASON
     .byte TYPE_ICE
-    .byte TYPE_DRAGON
+    .byte TYPE_FAITH
     .byte TYPE_DARK
+	.byte TYPE_HEART
     .byte -1
 
 AI_CV_ChargeUpMove:
@@ -2790,8 +2788,8 @@ AI_CV_Fly_End:
 	end
 
 AI_CV_Fly_TypesToEncourage:
-    .byte TYPE_GROUND
-    .byte TYPE_ROCK
+    .byte TYPE_EARTH
+    .byte TYPE_BEAST
     .byte TYPE_STEEL
     .byte -1
 
@@ -3510,11 +3508,11 @@ AI_DoubleBattleCheckUserStatus2:
 
 AI_DoubleBattleAllHittingGroundMove:
 	if_ability AI_USER_PARTNER, ABILITY_LEVITATE, Score_Plus2
-	if_type AI_USER_PARTNER, TYPE_FLYING, Score_Plus2
+	if_type AI_USER_PARTNER, TYPE_WIND, Score_Plus2
 	if_type AI_USER_PARTNER, TYPE_FIRE, Score_Minus10
 	if_type AI_USER_PARTNER, TYPE_ELECTRIC, Score_Minus10
 	if_type AI_USER_PARTNER, TYPE_POISON, Score_Minus10
-	if_type AI_USER_PARTNER, TYPE_ROCK, Score_Minus10
+	if_type AI_USER_PARTNER, TYPE_BEAST, Score_Minus10
 	goto Score_Minus3
 
 AI_DoubleBattleSkillSwap:
@@ -3528,7 +3526,7 @@ AI_DoubleBattleSkillSwap:
 AI_DoubleBattleElectricMove:
 	if_no_ability AI_TARGET_PARTNER, ABILITY_LIGHTNING_ROD, AI_DoubleBattleElectricMoveEnd
 	score -2
-	if_no_type AI_TARGET_PARTNER, TYPE_GROUND, AI_DoubleBattleElectricMoveEnd
+	if_no_type AI_TARGET_PARTNER, TYPE_EARTH, AI_DoubleBattleElectricMoveEnd
 	score -8
 
 AI_DoubleBattleElectricMoveEnd:
