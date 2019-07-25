@@ -3364,27 +3364,42 @@ static const struct TrainerMonItemCustomMoves sParty_Drake[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Roxanne1[] = {
+static const struct TrainerMonFullControl sParty_Roxanne1[] = {
     {
     .iv = 100,
     .lvl = 12,
     .species = SPECIES_GEODUDE,
     .heldItem = ITEM_NONE,
-    .moves = MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB
+    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB},
+    .gender = MON_FEMALE,
+    .nature = NATURE_QUIRKY,
+    .ability = 0, // Rock Head
+    .evs = { 0, 0, 0, 0, 0, 0 },
+    .ball = ITEM_TIMER_BALL,
     },
     {
     .iv = 100,
     .lvl = 12,
     .species = SPECIES_GEODUDE,
     .heldItem = ITEM_NONE,
-    .moves = MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB
+    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB},
+    .gender = MON_FEMALE,
+    .nature = NATURE_QUIRKY,
+    .ability = 0, // Rock Head
+    .evs = { 0, 0, 0, 0, 0, 0 },
+    .ball = ITEM_TIMER_BALL,
     },
     {
     .iv = 200,
     .lvl = 15,
     .species = SPECIES_NOSEPASS,
     .heldItem = ITEM_ORAN_BERRY,
-    .moves = MOVE_BLOCK, MOVE_HARDEN, MOVE_TACKLE, MOVE_ROCK_TOMB
+    .moves = {MOVE_BLOCK, MOVE_HARDEN, MOVE_TACKLE, MOVE_ROCK_TOMB},
+    .gender = MON_FEMALE,
+    .nature = NATURE_QUIRKY,
+    .ability = 0, // Sturdy
+    .evs = { 0, 0, 0, 0, 0, 0 },
+    .ball = ITEM_TIMER_BALL,
     }
 };
 

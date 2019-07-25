@@ -1907,7 +1907,33 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
                 break;
             }
+            case F_TRAINER_PARTY_FULL_CONTROL:
+            {
+                const struct TrainerMonFullControl *partyData = gTrainers[trainerNum].party.FullControl;
+                
+                fixedIV = partyData[i].iv * 31 / 255;
+                do
+                {
+                    CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, partyData[i].gender, partyData[i].nature, 0);
+                } while (IsMonShiny(&party[i]));
+                
+                SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].ability);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                SetMonData(&party[i], MON_DATA_POKEBALL, &partyData[i].ball);
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                }
+                for (j = 0; j < 6; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_HP_EV + j, &partyData[i].evs[j]);
+                }
+                break;
             }
+            }
+            
+            CalculateMonStats(&party[i]);
         }
 
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
